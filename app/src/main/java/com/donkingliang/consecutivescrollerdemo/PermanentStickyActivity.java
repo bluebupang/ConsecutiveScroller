@@ -1,27 +1,29 @@
 package com.donkingliang.consecutivescrollerdemo;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout;
 import com.donkingliang.consecutivescrollerdemo.adapter.RecyclerViewAdapter;
 
-public class StickyActivity extends AppCompatActivity {
+import java.util.List;
+
+public class PermanentStickyActivity extends AppCompatActivity {
 
     private ConsecutiveScrollerLayout scrollerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sticky);
+        setContentView(R.layout.activity_sticky_permanent);
 
         scrollerLayout = findViewById(R.id.scrollerLayout);
 
@@ -50,15 +52,12 @@ public class StickyActivity extends AppCompatActivity {
         recyclerView2.setAdapter(adapter2);
 
         // 监听吸顶view
-        scrollerLayout.setOnStickyChangeListener(new ConsecutiveScrollerLayout.OnStickyChangeListener() {
+        scrollerLayout.setOnPermanentStickyChangeListener(new ConsecutiveScrollerLayout.OnPermanentStickyChangeListener() {
             @Override
-            public void onStickyChange(@Nullable View oldStickyView, @Nullable View newStickyView) {
-                Log.e("eee",oldStickyView + " " + newStickyView);
+            public void onStickyChange(@NonNull List<View> mCurrentStickyViews) {
+                Log.e("eee",mCurrentStickyViews + "");
             }
         });
 
-
-        // 设置吸顶到顶部的距离
-//        scrollerLayout.setStickyOffset(50);
     }
 }
